@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from pathlib import Path
@@ -68,6 +69,17 @@ def console_entry_point():
         tracking_files = [
             query for query in arguments.query if query.endswith(".spotdlTrackingFile")
         ]
+
+        config = {}
+        try:
+            with open('spotdl-config.json', 'r') as f:
+                config = json.load(f)
+            if config["path_template"] is not None:
+                arguments.path_template = config["path_template"]
+            if config["lyrics_provider"] is not None:
+                arguments.lyrics_provider = config["lyrics_provider"]
+        except Exception:
+            pass
 
         # Restart downloads
         for tracking_file in tracking_files:
