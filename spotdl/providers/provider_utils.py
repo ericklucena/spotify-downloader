@@ -130,6 +130,8 @@ def _parse_path_template(path_template, song_object, output_format, short=False)
         artist=_sanitize_filename(song_object.contributing_artists[0]),
         title=_sanitize_filename(song_object.song_name),
         album=_sanitize_filename(song_object.album_name),
+        track=_sanitize_filename(f"{song_object.track_number:02d}"),
+        disc=_sanitize_filename(f"{song_object.disc_number}"),
         playlist=_sanitize_filename(song_object.playlist_name)
         if song_object.playlist_name
         else "",
